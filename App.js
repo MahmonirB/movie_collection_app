@@ -10,7 +10,7 @@ import AuthPage from './src/screens/Auth/AuthPage';
 import MainSignPage from './src/screens/Auth/MainSignPage';
 import EnterUserName from './src/screens/SignIn/EnterUserName';
 import ValidateUser from './src/screens/SignIn/ValidateUser';
-import HomePage from './src/screens/HomePage';
+import HomePage from './src/screens/MainPanel/HomePage';
 
 const store = configureStore();
 const stackNavigator = createStackNavigator(

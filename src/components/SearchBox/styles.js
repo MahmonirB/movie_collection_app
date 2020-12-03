@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     paddingHorizontal: 12,
     maxHeight: 50,
+    maxWidth: 364,
     borderRadius: 16,
     backgroundColor: colors.grayBorder,
   },

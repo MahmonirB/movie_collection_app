@@ -4,19 +4,24 @@ import {Image, View} from 'react-native';
 import {connect} from 'react-redux';
 import {addToken, removeToken} from '../../store/actions/actionSet';
 import {NavigationStackProp} from 'react-navigation-stack';
+import {NavigationScreenComponent} from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 // assets
 import logo from '../../../assets/images/logo.png';
 // styles
-import styles from '../styleSheet';
+import styles from '../MainPanel/styleSheet';
 
 /**
  * @interface IAuthPage
  */
 interface IAuthPage {
   navigation?: NavigationStackProp;
+  addToken: (value: string) => void;
+  removeToken?: () => {};
 }
-const AuthPage: React.FC<IAuthPage> = (props: IAuthPage) => {
+const AuthPage: NavigationScreenComponent<any, IAuthPage> = (
+  props: IAuthPage,
+) => {
   const {navigation} = props;
   useEffect(() => {
     checkAuthentication();
@@ -32,6 +37,7 @@ const AuthPage: React.FC<IAuthPage> = (props: IAuthPage) => {
       if (token == null || token === '') {
         navigation?.navigate('MainSignPage');
       } else {
+        props.addToken(token);
         navigation?.navigate('HomePage');
       }
     }, 2000);

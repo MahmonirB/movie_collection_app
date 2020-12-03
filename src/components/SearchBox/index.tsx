@@ -23,7 +23,7 @@ const SearchBox: React.FC<ISearchBox> = (props: ISearchBox) => {
         style={styles.inputStyle}
         placeholder={'search'}
         placeholderTextColor={colors.grayDisabledText}
-        onChange={(text) => {
+        onChangeText={(text) => {
           if (onChange) {
             onChange(text);
           }

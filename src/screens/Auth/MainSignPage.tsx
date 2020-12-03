@@ -5,7 +5,7 @@ import {NavigationStackProp} from 'react-navigation-stack';
 // components
 import Button from '../../components/Button';
 // styles
-import styles from '../styleSheet';
+import styles from '../MainPanel/styleSheet';
 
 /**
  * @interface IMainSignPage

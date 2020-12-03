@@ -3,26 +3,28 @@ import React from 'react';
 import {Text, View} from 'react-native';
 // styles
 import styles from './styles';
-// utility
-import {colors} from '../../utilities/styles/variables';
 
 /**
  * @name IMovieData
  */
 export interface IMovieData {
-  id: string;
-  title: string;
-  dateOfRelease: string;
-  director: string;
+  id?: number;
+  title?: string;
+  dateOfRelease?: string;
+  director?: string;
+  rating?: number;
+}
+/**
+ * @interface IMovieItemData
+ */
+export interface IMovieItemData {
+  item: IMovieData;
 }
 /**
  * @name IMovieListItem
  */
 interface IMovieListItem {
   movieItemData: IMovieItemData;
-}
-interface IMovieItemData {
-  item: IMovieData;
 }
 const MovieListItem: React.FC<IMovieListItem> = (props: IMovieListItem) => {
   const {movieItemData} = props;
@@ -37,5 +39,15 @@ const MovieListItem: React.FC<IMovieListItem> = (props: IMovieListItem) => {
       </Text>
     </View>
   );
+};
+MovieListItem.defaultProps = {
+  movieItemData: {
+    item: {
+      title: 'unkhnown',
+      dateOfRelease: 'date',
+      director: 'unkhnown director',
+      rating: 0,
+    },
+  },
 };
 export default MovieListItem;
