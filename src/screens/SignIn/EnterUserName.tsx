@@ -1,5 +1,5 @@
 // libs
-import React from 'react';
+import React, {useState} from 'react';
 import {View} from 'react-native';
 import styles from './styles';
 import {NavigationStackProp} from 'react-navigation-stack';
@@ -15,15 +15,19 @@ interface IEnterUserName {
 }
 const EnterUserName: React.FC<IEnterUserName> = (props: IEnterUserName) => {
   const {navigation} = props;
+  const [userName, setUserName] = useState<string>('');
   return (
     <View style={styles.usernameContainer}>
       <View style={styles.inputStyle}>
-        <TextBox placeholderText="Enter user name" />
+        <TextBox
+          onChange={(value) => setUserName(value)}
+          placeholderText="Enter user name"
+        />
       </View>
       <Button
         type="block"
         title="Next"
-        onClick={() => navigation?.navigate('ValidateUser')}
+        onClick={() => navigation?.navigate('ValidateUser', {userName})}
       />
     </View>
   );

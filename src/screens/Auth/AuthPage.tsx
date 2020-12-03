@@ -1,9 +1,14 @@
 // libs
 import React, {useEffect} from 'react';
+import {Image, View} from 'react-native';
 import {connect} from 'react-redux';
 import {addToken, removeToken} from '../../store/actions/actionSet';
 import {NavigationStackProp} from 'react-navigation-stack';
 import AsyncStorage from '@react-native-community/async-storage';
+// assets
+import logo from '../../../assets/images/logo.png';
+// styles
+import styles from '../styleSheet';
 
 /**
  * @interface IAuthPage
@@ -23,13 +28,19 @@ const AuthPage: React.FC<IAuthPage> = (props: IAuthPage) => {
    */
   const checkAuthentication = async () => {
     const token = await AsyncStorage.getItem('token');
-    if (token == null || token === '') {
-      navigation?.navigate('MainSignPage');
-    } else {
-      navigation?.navigate('HomePage');
-    }
+    setTimeout(() => {
+      if (token == null || token === '') {
+        navigation?.navigate('MainSignPage');
+      } else {
+        navigation?.navigate('HomePage');
+      }
+    }, 2000);
   };
-  return null;
+  return (
+    <View style={styles.mainContainer}>
+      <Image resizeMode="contain" source={logo} style={styles.logoStyle} />
+    </View>
+  );
 };
 const mapStateToProps = (state: any) => {
   return {

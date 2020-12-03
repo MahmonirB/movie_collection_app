@@ -11,5 +11,14 @@ const styles = StyleSheet.create({
   marginBottom: {
     marginBottom: 24,
   },
+  logoStyle: {
+    width: 164,
+    height: 64,
+  },
+  homeContainer: {
+    flex: 1,
+    paddingHorizontal: 16,
+    paddingTop: Platform.OS === 'android' ? 24 : 40,
+  },
 });
 export default styles;

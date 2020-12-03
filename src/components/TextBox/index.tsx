@@ -10,6 +10,7 @@ import styles from './styles';
 interface ITextBox {
   style?: StyleProp<ViewStyle>;
   placeholderText?: string;
+  onChange?: (arg0: string) => void;
 }
 
 /**
@@ -17,7 +18,7 @@ interface ITextBox {
  * @description TextBox component
  */
 const TextBox: React.FC<ITextBox> = (props: ITextBox) => {
-  const {style, placeholderText} = props;
+  const {style, placeholderText, onChange} = props;
 
   return (
     <TextInput
@@ -25,6 +26,12 @@ const TextBox: React.FC<ITextBox> = (props: ITextBox) => {
       keyboardType="default"
       placeholderTextColor={colors.grayDisabledText}
       placeholder={placeholderText}
+      onChangeText={(text) => {
+        if (onChange) {
+          onChange(text);
+        }
+      }}
+      onBlur={() => {}}
     />
   );
 };
