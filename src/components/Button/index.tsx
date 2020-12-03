@@ -1,6 +1,6 @@
 // libs
 import React from 'react';
-import {TouchableHighlight, Text} from 'react-native';
+import {TouchableHighlight, Text, ViewStyle} from 'react-native';
 // style
 import styles from './styles';
 /**
@@ -11,6 +11,7 @@ interface IButton {
   title: string;
   active?: boolean;
   onClick(): void;
+  style?: ViewStyle;
 }
 
 /**
@@ -18,7 +19,7 @@ interface IButton {
  * @description Button component
  */
 const Button: React.FC<IButton> = (props: IButton) => {
-  const {title, type, active, onClick} = props;
+  const {title, type, active, onClick, style} = props;
   /**
    * @name getInActiveStyle
    * @description return inactive button style
@@ -43,7 +44,12 @@ const Button: React.FC<IButton> = (props: IButton) => {
   return (
     <TouchableHighlight
       onPress={active ? onClick : () => {}}
-      style={[styles.mainContainer, buttonTypeStyle(), getInActiveStyle()]}>
+      style={[
+        style,
+        styles.mainContainer,
+        buttonTypeStyle(),
+        getInActiveStyle(),
+      ]}>
       <Text style={styles.textStyle}>{title}</Text>
     </TouchableHighlight>
   );

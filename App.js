@@ -6,15 +6,23 @@ import configureStore from './src/store/store';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 // components
+import AuthPage from './src/screens/Auth/AuthPage';
+import MainSignPage from './src/screens/Auth/MainSignPage';
+import EnterUserName from './src/screens/SignIn/EnterUserName';
+import ValidateUser from './src/screens/SignIn/ValidateUser';
 import HomePage from './src/screens/HomePage';
 
 const store = configureStore();
 const stackNavigator = createStackNavigator(
   {
-    Home: {screen: HomePage},
+    AuthPage: {screen: AuthPage},
+    MainSignPage: {screen: MainSignPage},
+    EnterUserName: {screen: EnterUserName},
+    ValidateUser: {screen: ValidateUser},
+    HomePage: {screen: HomePage},
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'AuthPage',
     defaultNavigationOptions: {
       header: null,
     },
