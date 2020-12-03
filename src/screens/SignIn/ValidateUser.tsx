@@ -1,6 +1,6 @@
 // libs
 import React, {useState} from 'react';
-import {ToastAndroid, View} from 'react-native';
+import {ToastAndroid, View, Text} from 'react-native';
 import styles from './styles';
 import {NavigationStackProp} from 'react-navigation-stack';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -24,11 +24,13 @@ const ValidateUser: NavigationScreenComponent<any, IValidateUser> = (
   const {navigation} = props;
   const userName = navigation?.getParam('userName', '');
   const [validationCode, setValidationCode] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
   /**
    * @name validateUser
    * @description validate user to sign in
    */
   const validateUser = () => {
+    setLoading(true);
     const bodyData = {
       username: userName,
       password: validationCode,
@@ -41,23 +43,34 @@ const ValidateUser: NavigationScreenComponent<any, IValidateUser> = (
           },
         })
         .then(async (response: any) => {
+          setLoading(false);
           await AsyncStorage.setItem('token', response.data.token);
           navigation?.navigate('HomePage');
         })
         .catch((error: any) => {
+          setLoading(false);
           ToastAndroid.show(error, 5000);
         });
-    } catch (error) {}
+    } catch (error) {
+      setLoading(false);
+    }
   };
   return (
     <View style={styles.usernameContainer}>
       <View style={styles.inputStyle}>
+        <Text style={styles.titleStyle}>Enter password</Text>
         <TextBox
           onChange={(value) => setValidationCode(value)}
           placeholderText="Enter validation code"
         />
       </View>
-      <Button type="block" title="Next" onClick={validateUser} />
+      <Button
+        active={validationCode !== ''}
+        loading={loading}
+        type="block"
+        title="Sign in"
+        onClick={validateUser}
+      />
     </View>
   );
 };

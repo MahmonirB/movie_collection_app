@@ -1,8 +1,9 @@
 // libs
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import styles from './styles';
 import {NavigationStackProp} from 'react-navigation-stack';
+import {NavigationScreenComponent} from 'react-navigation';
 // components
 import Button from '../../components/Button';
 import TextBox from '../../components/TextBox';
@@ -13,12 +14,15 @@ import TextBox from '../../components/TextBox';
 interface IEnterUserName {
   navigation?: NavigationStackProp;
 }
-const EnterUserName: React.FC<IEnterUserName> = (props: IEnterUserName) => {
+const EnterUserName: NavigationScreenComponent<any, IEnterUserName> = (
+  props: IEnterUserName,
+) => {
   const {navigation} = props;
   const [userName, setUserName] = useState<string>('');
   return (
     <View style={styles.usernameContainer}>
       <View style={styles.inputStyle}>
+        <Text style={styles.titleStyle}>Enter user Name</Text>
         <TextBox
           onChange={(value) => setUserName(value)}
           placeholderText="Enter user name"
@@ -27,6 +31,7 @@ const EnterUserName: React.FC<IEnterUserName> = (props: IEnterUserName) => {
       <Button
         type="block"
         title="Next"
+        active={userName !== ''}
         onClick={() => navigation?.navigate('ValidateUser', {userName})}
       />
     </View>

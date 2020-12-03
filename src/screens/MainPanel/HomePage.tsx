@@ -7,14 +7,17 @@ import {
   View,
   Text,
   TouchableHighlight,
+  BackHandler,
 } from 'react-native';
 import {NavigationStackProp} from 'react-navigation-stack';
 import {connect} from 'react-redux';
-import {addToken, removeToken} from '../../store/actions/actionAuth';
 import Icon from 'react-native-vector-icons/Feather';
+import {NavigationScreenComponent} from 'react-navigation';
+import AsyncStorage from '@react-native-community/async-storage';
 // components
 import axios from '../../utilities/ AxiosInstance';
 import SearchBox from '../../components/SearchBox';
+import {addToken, removeToken} from '../../store/actions/actionAuth';
 import MovieListItem, {
   IMovieItemData,
   IMovieData,
@@ -27,10 +30,13 @@ import styles, {underlayColor} from './styleSheet';
  */
 interface IHomePage {
   navigation?: NavigationStackProp;
+  removeToken: () => {};
   auth?: any;
 }
 
-const HomePage: React.FC<IHomePage> = (props: IHomePage) => {
+const HomePage: NavigationScreenComponent<any, IHomePage> = (
+  props: IHomePage,
+) => {
   const {navigation} = props;
   const [movieData, setMovieData] = useState<Array<IMovieData>>([]);
   const [searchText, setSearchText] = useState<string>('');
@@ -80,9 +86,10 @@ const HomePage: React.FC<IHomePage> = (props: IHomePage) => {
   /**
    * @name exitAccout
    */
-  function exitAccout() {
+  async function exitAccout() {
+    props.removeToken();
+    await AsyncStorage.removeItem('token');
     navigation?.replace('MainSignPage');
-    // clear token
   }
   return (
     <View style={styles.homeContainer}>
@@ -117,6 +124,9 @@ const HomePage: React.FC<IHomePage> = (props: IHomePage) => {
     </View>
   );
 };
+HomePage.navigationOptions = () => ({
+  header: null,
+});
 const mapStateToProps = (state: any) => {
   return {
     auth: state.auth,

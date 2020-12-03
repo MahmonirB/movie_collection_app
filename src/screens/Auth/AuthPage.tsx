@@ -48,6 +48,9 @@ const AuthPage: NavigationScreenComponent<any, IAuthPage> = (
     </View>
   );
 };
+AuthPage.navigationOptions = () => ({
+  header: null,
+});
 const mapStateToProps = (state: any) => {
   return {
     auth: state.auth,

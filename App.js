@@ -27,9 +27,6 @@ const stackNavigator = createStackNavigator(
   },
   {
     initialRouteName: 'AuthPage',
-    defaultNavigationOptions: {
-      header: null,
-    },
   },
 );
 const AppContainer = createAppContainer(stackNavigator);

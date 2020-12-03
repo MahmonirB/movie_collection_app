@@ -2,6 +2,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import {NavigationStackProp} from 'react-navigation-stack';
+import {NavigationScreenComponent} from 'react-navigation';
 // components
 import Button from '../../components/Button';
 // styles
@@ -13,7 +14,9 @@ import styles from './styles';
 interface IMainSignPage {
   navigation?: NavigationStackProp;
 }
-const MainSignPage: React.FC<IMainSignPage> = (props: IMainSignPage) => {
+const MainSignPage: NavigationScreenComponent<any, IMainSignPage> = (
+  props: IMainSignPage,
+) => {
   const {navigation} = props;
   return (
     <View style={styles.mainContainer}>
@@ -27,4 +30,7 @@ const MainSignPage: React.FC<IMainSignPage> = (props: IMainSignPage) => {
     </View>
   );
 };
+MainSignPage.navigationOptions = () => ({
+  header: null,
+});
 export default MainSignPage;
