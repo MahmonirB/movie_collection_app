@@ -11,6 +11,8 @@ import MainSignPage from './src/screens/Auth/MainSignPage';
 import EnterUserName from './src/screens/SignIn/EnterUserName';
 import ValidateUser from './src/screens/SignIn/ValidateUser';
 import HomePage from './src/screens/MainPanel/HomePage';
+import CategoryList from './src/screens/MainPanel/Category/CategoryList';
+import CategoryMovie from './src/screens/MainPanel/Category/CategoryMovie';
 
 const store = configureStore();
 const stackNavigator = createStackNavigator(
@@ -20,6 +22,8 @@ const stackNavigator = createStackNavigator(
     EnterUserName: {screen: EnterUserName},
     ValidateUser: {screen: ValidateUser},
     HomePage: {screen: HomePage},
+    CategoryList: {screen: CategoryList},
+    CategoryMovie: {screen: CategoryMovie},
   },
   {
     initialRouteName: 'AuthPage',

@@ -5,7 +5,7 @@ import styles from './styles';
 import {NavigationStackProp} from 'react-navigation-stack';
 import AsyncStorage from '@react-native-community/async-storage';
 import {connect} from 'react-redux';
-import {addToken, removeToken} from '../../store/actions/actionSet';
+import {addToken, removeToken} from '../../store/actions/actionAuth';
 import {NavigationScreenComponent} from 'react-navigation';
 // components
 import axios from '../../utilities/ AxiosInstance';

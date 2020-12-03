@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {NavigationStackProp} from 'react-navigation-stack';
 import {connect} from 'react-redux';
-import {addToken, removeToken} from '../../store/actions/actionSet';
+import {addToken, removeToken} from '../../store/actions/actionAuth';
 import Icon from 'react-native-vector-icons/Feather';
 // components
 import axios from '../../utilities/ AxiosInstance';
@@ -20,7 +20,7 @@ import MovieListItem, {
   IMovieData,
 } from '../../components/MovieListItem';
 // styles
-import styles from './styleSheet';
+import styles, {underlayColor} from './styleSheet';
 
 /**
  * @interface IHomePage
@@ -98,10 +98,13 @@ const HomePage: React.FC<IHomePage> = (props: IHomePage) => {
       />
       <View>{hasMore && <ActivityIndicator color="blue" size={30} />}</View>
       <View style={styles.footerStyle}>
-        <TouchableHighlight style={styles.menuItemStyle}>
+        <TouchableHighlight
+          onPress={() => navigation?.navigate('CategoryList')}
+          underlayColor={underlayColor}
+          style={styles.menuItemStyle}>
           <>
             <Icon name="pocket" size={20} />
-            <Text>Category</Text>
+            <Text>Categories List</Text>
           </>
         </TouchableHighlight>
         <TouchableHighlight onPress={exitAccout} style={styles.menuItemStyle}>

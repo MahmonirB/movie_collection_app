@@ -2,14 +2,14 @@
 import React, {useEffect} from 'react';
 import {Image, View} from 'react-native';
 import {connect} from 'react-redux';
-import {addToken, removeToken} from '../../store/actions/actionSet';
+import {addToken, removeToken} from '../../store/actions/actionAuth';
 import {NavigationStackProp} from 'react-navigation-stack';
 import {NavigationScreenComponent} from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 // assets
 import logo from '../../../assets/images/logo.png';
 // styles
-import styles from '../MainPanel/styleSheet';
+import styles from './styles';
 
 /**
  * @interface IAuthPage

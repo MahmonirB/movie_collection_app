@@ -1,9 +1,11 @@
 // libs
 import {createStore, combineReducers} from 'redux';
-import {authReducer} from '../store/reducer/reducers';
+import {authReducer} from './reducers/authReducer';
+import {categoryReducer} from './reducers/categoryReducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  category: categoryReducer,
 });
 
 const configureStore = () => {
