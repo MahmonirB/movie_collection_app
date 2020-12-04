@@ -1,7 +1,6 @@
 // libs
 import React from 'react';
 import {
-  TouchableHighlight,
   Text,
   ViewStyle,
   StyleProp,

@@ -31,11 +31,12 @@ const CategoryMovie: React.FC<ICategoryMovie> = (props: ICategoryMovie) => {
   const [movieData, setMovieData] = useState<IMovieResponse>({});
   const [hasMore, setHasMore] = useState(false);
   const offset = useRef(1);
+  const mountStatus = useRef(true);
 
   useEffect(() => {
     categoryName.current = props.category.categoryItem;
-    console.log(props.category.categoryItem);
     renderToGetData();
+    return () => (mountStatus.current = false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -54,7 +55,7 @@ const CategoryMovie: React.FC<ICategoryMovie> = (props: ICategoryMovie) => {
         },
       );
       if (responseData.status === 200) {
-        setMovieData(responseData.data);
+        mountStatus.current && setMovieData(responseData.data);
       } else {
         ToastAndroid.show('Error in request', 5000);
       }

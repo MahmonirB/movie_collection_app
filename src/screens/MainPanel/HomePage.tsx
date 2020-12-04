@@ -70,10 +70,12 @@ const HomePage: NavigationScreenComponent<any, IHomePage> = (
   const [searchText, setSearchText] = useState<string>('');
   const [hasMore, setHasMore] = useState(false);
   const offset = useRef(1);
+  const mountStatus = useRef(true); // for aboart controlling withing async func
 
   useEffect(() => {
     offset.current = 1;
     renderToGetData();
+    return () => (mountStatus.current = false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);
 
@@ -92,7 +94,7 @@ const HomePage: NavigationScreenComponent<any, IHomePage> = (
         },
       );
       if (responseData.status === 200) {
-        setMovieData(responseData.data);
+        mountStatus.current && setMovieData(responseData.data);
       } else {
         ToastAndroid.show('Error in request', 5000);
       }
@@ -174,13 +176,17 @@ const HomePage: NavigationScreenComponent<any, IHomePage> = (
       <View style={styles.footerStyle}>
         <TouchableHighlight
           onPress={() => navigation?.navigate('CategoryList')}
+          underlayColor="white"
           style={styles.menuItemStyle}>
           <>
             <Icon name="pocket" size={20} />
             <Text>Categories List</Text>
           </>
         </TouchableHighlight>
-        <TouchableHighlight onPress={exitAccout} style={styles.menuItemStyle}>
+        <TouchableHighlight
+          underlayColor="white"
+          onPress={exitAccout}
+          style={styles.menuItemStyle}>
           <>
             <Icon name="log-out" size={20} />
             <Text>Exit</Text>

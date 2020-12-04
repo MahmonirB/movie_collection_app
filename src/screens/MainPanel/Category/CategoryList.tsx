@@ -54,9 +54,11 @@ const CategoryList: NavigationScreenComponent<any, ICategoryList> = (
   const [categoryData, setCategoryData] = useState<ICategoryResponse>({});
   const [hasMore, setHasMore] = useState(false);
   const offset = useRef(1);
+  const mountStatus = useRef(true);
 
   useEffect(() => {
     renderToGetData();
+    return () => (mountStatus.current = false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   /**
@@ -74,7 +76,7 @@ const CategoryList: NavigationScreenComponent<any, ICategoryList> = (
         },
       );
       if (responseData.status === 200) {
-        setCategoryData(responseData.data);
+        mountStatus.current && setCategoryData(responseData.data);
       } else {
         ToastAndroid.show('Error in request', 5000);
       }
