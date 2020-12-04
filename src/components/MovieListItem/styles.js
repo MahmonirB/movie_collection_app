@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     justifyContent: 'center',
     padding: 12,
-    marginVertical: 6,
+    marginBottom: 6,
+    height: 140,
   },
   titleStyle: {
     fontWeight: 'bold',

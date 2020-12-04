@@ -1,5 +1,5 @@
 // libs
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -7,7 +7,7 @@ import {
   View,
   Text,
   TouchableHighlight,
-  BackHandler,
+  RefreshControl,
 } from 'react-native';
 import {NavigationStackProp} from 'react-navigation-stack';
 import {connect} from 'react-redux';
@@ -17,13 +17,38 @@ import AsyncStorage from '@react-native-community/async-storage';
 // components
 import axios from '../../utilities/ AxiosInstance';
 import SearchBox from '../../components/SearchBox';
-import {addToken, removeToken} from '../../store/actions/actionAuth';
+import {removeToken} from '../../store/actions/actionAuth';
 import MovieListItem, {
   IMovieItemData,
   IMovieData,
 } from '../../components/MovieListItem';
 // styles
 import styles, {underlayColor} from './styleSheet';
+import {colors} from '../../utilities/styles/variables';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+
+/**
+ * @interface IMovieResponse
+ */
+export interface IMovieResponse {
+  count: number;
+  results: Array<IMovieData>;
+}
+
+/**
+ * @interface IResponseDTO
+ */
+export interface IResponseDTO {
+  data: IMovieResponse;
+  status: number;
+}
+
+/**
+ * @interface IAuth
+ */
+interface IAuth {
+  token: string;
+}
 
 /**
  * @interface IHomePage
@@ -31,58 +56,51 @@ import styles, {underlayColor} from './styleSheet';
 interface IHomePage {
   navigation?: NavigationStackProp;
   removeToken: () => {};
-  auth?: any;
+  auth?: IAuth;
 }
+
+const limitNum = 20; // number of page data in each retrive
+const ITEM_HEIGHT = 170; // movie item height
 
 const HomePage: NavigationScreenComponent<any, IHomePage> = (
   props: IHomePage,
 ) => {
   const {navigation} = props;
-  const [movieData, setMovieData] = useState<Array<IMovieData>>([]);
+  const [movieData, setMovieData] = useState<IMovieResponse>({});
   const [searchText, setSearchText] = useState<string>('');
-  const [limit, setLimit] = useState(20);
   const [hasMore, setHasMore] = useState(false);
+  const offset = useRef(1);
 
   useEffect(() => {
+    offset.current = 1;
     renderToGetData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);
+
   /**
    * @name renderToGetData
    * @description get movies data from IMD service
    */
-  const renderToGetData = () => {
-    setHasMore(true);
+  const renderToGetData = async () => {
     try {
-      axios
-        .get(`/movie/?limit=${limit}&search=${searchText}`, {
+      const responseData: IResponseDTO = await axios.get(
+        `/movie/?limit=${limitNum}&offset=${offset.current}&search=${searchText}`,
+        {
           headers: {
             'Content-Type': 'application/json',
           },
-        })
-        .then((responseData) => {
-          setMovieData(responseData.data.results);
-          setLimit(limit + 20);
-          setHasMore(false);
-        })
-        .catch((error) => {
-          ToastAndroid.show(
-            `Error in fetch data ${error.response.status}`,
-            5000,
-          );
-        });
+        },
+      );
+      if (responseData.status === 200) {
+        setMovieData(responseData.data);
+      } else {
+        ToastAndroid.show('Error in request', 5000);
+      }
     } catch (error) {
-      setHasMore(false);
-      ToastAndroid.show('Network Error in fetch data', 5000);
+      ToastAndroid.show(`Error in fetch data ${error.response.status}`, 5000);
     }
   };
-  /**
-   * @name renderItem
-   * @param param0
-   */
-  const renderMovieItem = (movieItemData: IMovieItemData) => {
-    return <MovieListItem movieItemData={movieItemData} />;
-  };
+
   /**
    * @name exitAccout
    */
@@ -91,23 +109,71 @@ const HomePage: NavigationScreenComponent<any, IHomePage> = (
     await AsyncStorage.removeItem('token');
     navigation?.replace('MainSignPage');
   }
+
+  /**
+   * @name renderItem
+   * @param param0
+   */
+  const renderItemFunction = (movieItemData: IMovieItemData) => (
+    <MovieListItem key={movieItemData.item.id} movieItemData={movieItemData} />
+  );
+
+  /**
+   * @name onEndReach
+   * @async
+   * @description onEndReach trigger when scroll reach to end and get next page
+   */
+  const onEndReach = async () => {
+    setHasMore(true);
+    if (movieData.count > offset.current + limitNum) {
+      offset.current = offset.current + limitNum;
+      await renderToGetData();
+    }
+    setHasMore(false);
+  };
+
+  /**
+   * @name pullToRefresh
+   * @description pullToRefresh trigger to get previous page of data
+   */
+  const pullToRefresh = () => {
+    if (offset.current >= limitNum) {
+      offset.current = offset.current - limitNum;
+      renderToGetData();
+    }
+  };
+
   return (
     <View style={styles.homeContainer}>
       <View style={styles.searchContainer}>
         <SearchBox onChange={(searchedValue) => setSearchText(searchedValue)} />
       </View>
       <FlatList
-        data={movieData}
-        renderItem={renderMovieItem}
+        data={movieData.results}
+        renderItem={renderItemFunction}
         keyExtractor={(item) => String(item.id)}
-        onEndReached={renderToGetData}
-        onEndReachedThreshold={0.7}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.1}
+        maxToRenderPerBatch={4}
+        refreshControl={
+          <RefreshControl
+            refreshing={false}
+            onRefresh={pullToRefresh}
+            colors={[colors.activeBlue]}
+            tintColor={colors.activeBlue}
+            size={40}
+          />
+        }
+        getItemLayout={(data, index) => ({
+          length: ITEM_HEIGHT,
+          offset: ITEM_HEIGHT * index,
+          index,
+        })}
       />
       <View>{hasMore && <ActivityIndicator color="blue" size={30} />}</View>
       <View style={styles.footerStyle}>
         <TouchableHighlight
           onPress={() => navigation?.navigate('CategoryList')}
-          underlayColor={underlayColor}
           style={styles.menuItemStyle}>
           <>
             <Icon name="pocket" size={20} />
@@ -134,9 +200,6 @@ const mapStateToProps = (state: any) => {
 };
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    addToken: (tokenNumber: string) => {
-      dispatch(addToken(tokenNumber));
-    },
     removeToken: () => {
       dispatch(removeToken());
     },

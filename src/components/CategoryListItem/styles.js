@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 12,
     marginVertical: 6,
+    height: 70,
   },
   titleStyle: {
     fontWeight: 'bold',

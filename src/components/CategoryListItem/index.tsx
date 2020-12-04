@@ -1,5 +1,5 @@
 //libs
-import React from 'react';
+import React, { memo } from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 // styles
 import styles from './styles';
@@ -42,4 +42,4 @@ CategoryListItem.defaultProps = {
     },
   },
 };
-export default CategoryListItem;
+export default memo(CategoryListItem);

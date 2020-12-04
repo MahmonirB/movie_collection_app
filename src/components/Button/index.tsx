@@ -6,6 +6,7 @@ import {
   ViewStyle,
   StyleProp,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 // style
 import styles from './styles';
@@ -49,7 +50,7 @@ const Button: React.FC<IButton> = (props: IButton) => {
     }
   };
   return (
-    <TouchableHighlight
+    <TouchableOpacity
       onPress={active ? onClick : () => {}}
       style={[
         style,
@@ -62,7 +63,7 @@ const Button: React.FC<IButton> = (props: IButton) => {
       ) : (
         <ActivityIndicator color="white" size="small" />
       )}
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 Button.defaultProps = {

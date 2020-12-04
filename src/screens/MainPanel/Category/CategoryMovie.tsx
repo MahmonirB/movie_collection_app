@@ -1,16 +1,20 @@
 // libs
 import React, {useEffect, useRef, useState} from 'react';
-import {ActivityIndicator, FlatList, ToastAndroid, View} from 'react-native';
-import {NavigationStackProp} from 'react-navigation-stack';
+import {
+  ActivityIndicator,
+  FlatList,
+  ToastAndroid,
+  View,
+  RefreshControl,
+} from 'react-native';
 import {connect} from 'react-redux';
 // components
 import axios from '../../../utilities/ AxiosInstance';
-import MovieListItem, {
-  IMovieItemData,
-  IMovieData,
-} from '../../../components/MovieListItem';
+import MovieListItem, {IMovieItemData} from '../../../components/MovieListItem';
+import {IMovieResponse, IResponseDTO} from '../HomePage';
 // styles
 import styles from './styles';
+import {colors} from '../../../utilities/styles/variables';
 
 /**
  * @interface ICategoryMovie
@@ -19,45 +23,43 @@ interface ICategoryMovie {
   category: any;
 }
 
+const limitNum = 20; //number of moview in each page
+const ITEM_HEIGHT = 170;
+
 const CategoryMovie: React.FC<ICategoryMovie> = (props: ICategoryMovie) => {
   const categoryName = useRef<string>('');
-  const [movieData, setMovieData] = useState<Array<IMovieData>>([]);
-  const [limit, setLimit] = useState(20);
+  const [movieData, setMovieData] = useState<IMovieResponse>({});
   const [hasMore, setHasMore] = useState(false);
+  const offset = useRef(1);
 
   useEffect(() => {
     categoryName.current = props.category.categoryItem;
+    console.log(props.category.categoryItem);
     renderToGetData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   /**
    * @name renderToGetData
    * @description get movies data from IMD service
    */
-  const renderToGetData = () => {
-    setHasMore(true);
+  const renderToGetData = async () => {
     try {
-      axios
-        .get(`/movie/?tags=${categoryName.current}&limit=${limit}`, {
+      const responseData: IResponseDTO = await axios.get(
+        `/movie/?tags=${categoryName.current}&limit=${limitNum}&offset=${offset.current}`,
+        {
           headers: {
             'Content-Type': 'application/json',
           },
-        })
-        .then((responseData) => {
-          console.log(responseData.data);
-          setMovieData(responseData.data.results);
-          setLimit(limit + 20);
-          setHasMore(false);
-        })
-        .catch((error) => {
-          ToastAndroid.show(
-            `Error in fetch data ${error.response.status}`,
-            5000,
-          );
-        });
+        },
+      );
+      if (responseData.status === 200) {
+        setMovieData(responseData.data);
+      } else {
+        ToastAndroid.show('Error in request', 5000);
+      }
     } catch (error) {
-      setHasMore(false);
-      ToastAndroid.show('Network Error in fetch data', 5000);
+      ToastAndroid.show(`Error in fetch data ${error.response.status}`, 5000);
     }
   };
   /**
@@ -67,14 +69,55 @@ const CategoryMovie: React.FC<ICategoryMovie> = (props: ICategoryMovie) => {
   const renderMovieItem = (movieItemData: IMovieItemData) => {
     return <MovieListItem movieItemData={movieItemData} />;
   };
+
+  /**
+   * @name onEndReach
+   * @async
+   * @description onEndReach trigger when scroll reach to end and get next page
+   */
+  const onEndReach = async () => {
+    setHasMore(true);
+    if (movieData.count > offset.current + limitNum) {
+      offset.current = offset.current + limitNum;
+      await renderToGetData();
+    }
+    setHasMore(false);
+  };
+
+  /**
+   * @name pullToRefresh
+   * @description pullToRefresh trigger to get previous page of data
+   */
+  const pullToRefresh = () => {
+    if (offset.current >= limitNum) {
+      offset.current = offset.current - limitNum;
+      renderToGetData();
+    }
+  };
+
   return (
     <View style={styles.homeContainer}>
       <FlatList
-        data={movieData}
+        data={movieData.results}
         renderItem={renderMovieItem}
         keyExtractor={(item) => String(item.id)}
-        onEndReached={renderToGetData}
-        onEndReachedThreshold={0.7}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.1}
+        maxToRenderPerBatch={4}
+        refreshControl={
+          <RefreshControl
+            refreshing={false}
+            onRefresh={pullToRefresh}
+            colors={[colors.activeBlue]}
+            tintColor={colors.activeBlue}
+            size={40}
+          />
+        }
+        getItemLayout={(data, index) => ({
+          length: ITEM_HEIGHT,
+          offset: ITEM_HEIGHT * index,
+          index,
+        })}
       />
       <View>{hasMore && <ActivityIndicator color="blue" size={30} />}</View>
     </View>

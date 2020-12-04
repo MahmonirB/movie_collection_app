@@ -15,5 +15,6 @@ const styles = StyleSheet.create({
     width: 164,
     height: 64,
   },
+  titleLogin: {marginBottom: 24, fontSize: 18, fontWeight: 'bold'},
 });
 export default styles;

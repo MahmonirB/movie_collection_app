@@ -1,5 +1,5 @@
 //libs
-import React from 'react';
+import React, {memo} from 'react';
 import {Text, View} from 'react-native';
 // styles
 import styles from './styles';
@@ -51,4 +51,4 @@ MovieListItem.defaultProps = {
     },
   },
 };
-export default MovieListItem;
+export default memo(MovieListItem);

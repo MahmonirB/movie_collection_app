@@ -29,30 +29,28 @@ const ValidateUser: NavigationScreenComponent<any, IValidateUser> = (
    * @name validateUser
    * @description validate user to sign in
    */
-  const validateUser = () => {
+  const validateUser = async () => {
     setLoading(true);
     const bodyData = {
       username: userName,
       password: validationCode,
     };
     try {
-      axios
-        .post('/user/auth-token', bodyData, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(async (response: any) => {
-          setLoading(false);
-          await AsyncStorage.setItem('token', response.data.token);
-          navigation?.navigate('HomePage');
-        })
-        .catch((error: any) => {
-          setLoading(false);
-          ToastAndroid.show(error, 5000);
-        });
+      const response = await axios.post('/user/auth-token', bodyData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.status === 200) {
+        setLoading(false);
+        await AsyncStorage.setItem('token', response.data.token);
+        navigation?.navigate('HomePage');
+      } else {
+        ToastAndroid.show('Error in request', 5000);
+      }
     } catch (error) {
       setLoading(false);
+      ToastAndroid.show('Error in fetch data ' + error.response.status, 5000);
     }
   };
   return (

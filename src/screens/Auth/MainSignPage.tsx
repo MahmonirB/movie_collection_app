@@ -1,6 +1,6 @@
 // libs
 import React from 'react';
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 import {NavigationStackProp} from 'react-navigation-stack';
 import {NavigationScreenComponent} from 'react-navigation';
 // components
@@ -20,6 +20,7 @@ const MainSignPage: NavigationScreenComponent<any, IMainSignPage> = (
   const {navigation} = props;
   return (
     <View style={styles.mainContainer}>
+      <Text style={styles.titleLogin}>Join to search movie</Text>
       <Button
         type="block"
         title="Sign in"
