@@ -54,7 +54,7 @@ const CategoryList: NavigationScreenComponent<any, ICategoryList> = (
   const [categoryData, setCategoryData] = useState<ICategoryResponse>({});
   const [hasMore, setHasMore] = useState(false);
   const offset = useRef(1);
-  const mountStatus = useRef(true);
+  const mountStatus = useRef(true); // for aboart controlling withing async func
 
   useEffect(() => {
     renderToGetData();

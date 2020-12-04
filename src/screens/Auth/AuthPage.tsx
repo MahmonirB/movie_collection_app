@@ -2,7 +2,7 @@
 import React, {useEffect} from 'react';
 import {Image, View} from 'react-native';
 import {connect} from 'react-redux';
-import {addToken, removeToken} from '../../store/actions/actionAuth';
+import {addToken} from '../../store/actions/actionAuth';
 import {NavigationStackProp} from 'react-navigation-stack';
 import {NavigationScreenComponent} from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -17,7 +17,6 @@ import styles from './styles';
 interface IAuthPage {
   navigation?: NavigationStackProp;
   addToken: (value: string) => void;
-  removeToken?: () => {};
 }
 const AuthPage: NavigationScreenComponent<any, IAuthPage> = (
   props: IAuthPage,
@@ -60,9 +59,6 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     addToken: (tokenNumber: string) => {
       dispatch(addToken(tokenNumber));
-    },
-    removeToken: () => {
-      dispatch(removeToken());
     },
   };
 };

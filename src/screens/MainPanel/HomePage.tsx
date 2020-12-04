@@ -70,12 +70,10 @@ const HomePage: NavigationScreenComponent<any, IHomePage> = (
   const [searchText, setSearchText] = useState<string>('');
   const [hasMore, setHasMore] = useState(false);
   const offset = useRef(1);
-  const mountStatus = useRef(true); // for aboart controlling withing async func
 
   useEffect(() => {
     offset.current = 1;
     renderToGetData();
-    return () => (mountStatus.current = false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);
 
@@ -94,7 +92,7 @@ const HomePage: NavigationScreenComponent<any, IHomePage> = (
         },
       );
       if (responseData.status === 200) {
-        mountStatus.current && setMovieData(responseData.data);
+        setMovieData(responseData.data);
       } else {
         ToastAndroid.show('Error in request', 5000);
       }
