@@ -6,6 +6,7 @@ import {
   ToastAndroid,
   View,
   RefreshControl,
+  Text,
 } from 'react-native';
 import {connect} from 'react-redux';
 // components
@@ -63,6 +64,17 @@ const CategoryMovie: React.FC<ICategoryMovie> = (props: ICategoryMovie) => {
       ToastAndroid.show(`Error in fetch data ${error.response.status}`, 5000);
     }
   };
+
+  /**
+   * @name isEmpty
+   * @param inputObj
+   */
+  function isEmpty(inputObj: Object) {
+    return (
+      Object.keys(inputObj).length === 0 && inputObj.constructor === Object
+    );
+  }
+
   /**
    * @name renderItem
    * @param param0
@@ -98,6 +110,11 @@ const CategoryMovie: React.FC<ICategoryMovie> = (props: ICategoryMovie) => {
 
   return (
     <View style={styles.homeContainer}>
+      <View>
+        {!isEmpty(movieData) && !movieData.count ? (
+          <Text>There is no movie in this category</Text>
+        ) : null}
+      </View>
       <FlatList
         data={movieData.results}
         renderItem={renderMovieItem}
