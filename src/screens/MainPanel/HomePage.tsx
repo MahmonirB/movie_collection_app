@@ -172,6 +172,15 @@ const HomePage: NavigationScreenComponent<any, IHomePage> = (
       />
       <View>{hasMore && <ActivityIndicator color="blue" size={30} />}</View>
       <View style={styles.footerStyle}>
+      <TouchableHighlight
+          onPress={() => navigation?.navigate('MapScreen')}
+          underlayColor="white"
+          style={styles.menuItemStyle}>
+          <>
+            <Icon name="map" size={20} />
+            <Text>Map Screen</Text>
+          </>
+        </TouchableHighlight>
         <TouchableHighlight
           onPress={() => navigation?.navigate('CategoryList')}
           underlayColor="white"

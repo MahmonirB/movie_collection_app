@@ -13,6 +13,7 @@ import ValidateUser from './src/screens/SignIn/ValidateUser';
 import HomePage from './src/screens/MainPanel/HomePage';
 import CategoryList from './src/screens/MainPanel/Category/CategoryList';
 import CategoryMovie from './src/screens/MainPanel/Category/CategoryMovie';
+import MapScreen from './src/screens/Map';
 
 const store = configureStore();
 const stackNavigator = createStackNavigator(
@@ -24,6 +25,7 @@ const stackNavigator = createStackNavigator(
     HomePage: {screen: HomePage},
     CategoryList: {screen: CategoryList},
     CategoryMovie: {screen: CategoryMovie},
+    MapScreen: {screen: MapScreen},
   },
   {
     initialRouteName: 'AuthPage',
