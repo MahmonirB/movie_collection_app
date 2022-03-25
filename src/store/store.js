@@ -1,7 +1,7 @@
 // libs
-import {createStore, combineReducers} from 'redux';
-import {authReducer} from './reducers/authReducer';
-import {categoryReducer} from './reducers/categoryReducer';
+import { createStore, combineReducers } from 'redux';
+import { authReducer } from './reducers/authReducer';
+import { categoryReducer } from './reducers/categoryReducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,

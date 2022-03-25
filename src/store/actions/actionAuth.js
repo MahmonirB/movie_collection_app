@@ -1,4 +1,4 @@
-import {ADD_TOKEN, REMOVE_TOKEN} from './types';
+import { ADD_TOKEN, REMOVE_TOKEN } from './types';
 
 export const addToken = (token) => {
   return {

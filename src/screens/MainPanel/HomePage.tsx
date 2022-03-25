@@ -16,12 +16,9 @@ import { NavigationScreenComponent } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 // components
 import axios from '../../utilities/ AxiosInstance';
-import SearchBox from '../../components/SearchBox';
+import { SearchBox, MovieListItem } from '../../components';
 import { removeToken } from '../../store/actions/actionAuth';
-import MovieListItem, {
-  IMovieItemData,
-  IMovieData,
-} from '../../components/MovieListItem';
+import { IMovieItemData, IMovieData } from '../../components/MovieListItem';
 // styles
 import styles from './styleSheet';
 import { colors } from '../../utilities/styles/variables';

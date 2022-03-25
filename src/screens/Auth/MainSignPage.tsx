@@ -1,10 +1,10 @@
 // libs
 import React from 'react';
-import {Text, View} from 'react-native';
-import {NavigationStackProp} from 'react-navigation-stack';
-import {NavigationScreenComponent} from 'react-navigation';
+import { Text, View } from 'react-native';
+import { NavigationStackProp } from 'react-navigation-stack';
+import { NavigationScreenComponent } from 'react-navigation';
 // components
-import Button from '../../components/Button';
+import { Button } from '../../components';
 // styles
 import styles from './styles';
 
@@ -17,7 +17,7 @@ interface IMainSignPage {
 const MainSignPage: NavigationScreenComponent<any, IMainSignPage> = (
   props: IMainSignPage,
 ) => {
-  const {navigation} = props;
+  const { navigation } = props;
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.titleLogin}>Join to search movie</Text>

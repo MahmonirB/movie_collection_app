@@ -8,4 +8,4 @@ const colors = {
   grayDisabledText: '#BEBEBE',
   grayBorder: '#E3E3E3',
 };
-export {colors};
+export { colors };

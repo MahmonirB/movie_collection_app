@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   usernameContainer: {
@@ -10,6 +10,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  titleStyle: {fontSize: 18, fontWeight: 'bold', marginBottom: 8},
+  titleStyle: { fontSize: 18, fontWeight: 'bold', marginBottom: 8 },
 });
 export default styles;

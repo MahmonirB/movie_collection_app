@@ -1,6 +1,6 @@
 //libs
 import React, { memo } from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 // styles
 import styles from './styles';
 
@@ -24,16 +24,16 @@ interface ICategoryListItem {
   CategoryItemData: ICategoryItemData;
   onClick: () => void;
 }
-const CategoryListItem: React.FC<ICategoryListItem> = (
-  props: ICategoryListItem,
-) => {
-  const {CategoryItemData, onClick} = props;
-  return (
-    <TouchableOpacity onPress={onClick} style={styles.listItemStyle}>
-      <Text style={styles.titleStyle}>{CategoryItemData.item.name}</Text>
-    </TouchableOpacity>
-  );
-};
+const CategoryListItem: React.FC<ICategoryListItem> = memo(
+  (props: ICategoryListItem) => {
+    const { CategoryItemData, onClick } = props;
+    return (
+      <TouchableOpacity onPress={onClick} style={styles.listItemStyle}>
+        <Text style={styles.titleStyle}>{CategoryItemData.item.name}</Text>
+      </TouchableOpacity>
+    );
+  },
+);
 CategoryListItem.defaultProps = {
   onClick: () => {},
   CategoryItemData: {
@@ -42,4 +42,4 @@ CategoryListItem.defaultProps = {
     },
   },
 };
-export default memo(CategoryListItem);
+export { CategoryListItem };

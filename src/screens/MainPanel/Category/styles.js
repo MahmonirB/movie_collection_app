@@ -1,4 +1,4 @@
-import {StyleSheet, Platform} from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 const styles = StyleSheet.create({
   homeContainer: {
@@ -7,6 +7,6 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'android' ? 8 : 20,
     paddingBottom: 16,
   },
-  titleStyle: {fontSize: 20, fontWeight: 'bold', marginBottom: 20},
+  titleStyle: { fontSize: 20, fontWeight: 'bold', marginBottom: 20 },
 });
 export default styles;

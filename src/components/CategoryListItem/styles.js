@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {colors} from '../../utilities/styles/variables';
+import { StyleSheet } from 'react-native';
+import { colors } from '../../utilities/styles/variables';
 
 const styles = StyleSheet.create({
   listItemStyle: {
