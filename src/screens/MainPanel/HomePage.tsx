@@ -14,15 +14,15 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 import { NavigationScreenComponent } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
+import axios from 'react-native-axios';
 // components
-import axios from '../../utilities/ AxiosInstance';
-import { SearchBox, MovieListItem } from '../../components';
-import { removeToken } from '../../store/actions/actionAuth';
-import { IMovieItemData, IMovieData } from '../../components/MovieListItem';
+import { SearchBox, MovieListItem } from 'components';
+import { removeToken } from 'store/actions/actionAuth';
+import { IMovieItemData, IMovieData } from 'components/MovieListItem';
 // styles
 import styles from './styleSheet';
-import { colors } from '../../utilities/styles/variables';
-import useDebounce from '../../hooks/useDebounce';
+import { colors } from 'utilities/styles/variables';
+import useDebounce from 'hooks/useDebounce';
 
 /**
  * @interface IMovieResponse
@@ -124,7 +124,7 @@ const HomePage: NavigationScreenComponent<any, IHomePage> = (
    */
   const onEndReach = async () => {
     setHasMore(true);
-    if (movieData.count > offset.current + limitNum) {
+    if (movieData?.count > offset.current + limitNum) {
       offset.current = offset.current + limitNum;
       await renderToGetData();
     }

@@ -2,7 +2,7 @@
 import React from 'react';
 import { StyleProp, TextInput, ViewStyle } from 'react-native';
 // utility
-import { colors } from '../../utilities/styles/variables';
+import { colors } from 'utilities/styles/variables';
 import styles from './styles';
 /**
  * @interface ITextBox

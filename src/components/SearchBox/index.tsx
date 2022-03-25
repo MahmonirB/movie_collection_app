@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Feather';
 // styles
 import styles from './styles';
 // utility
-import { colors } from '../../utilities/styles/variables';
+import { colors } from 'utilities/styles/variables';
 
 /**
  * @name ISearchBox

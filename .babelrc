@@ -1,0 +1,23 @@
+{
+    "presets": [
+      "module:metro-react-native-babel-preset"
+    ],
+    "plugins": [
+      [
+        "module-resolver",
+        {
+          "extensions": [".android.js", ".ios.js", ".js", ".android.tsx", ".ios.tsx",".ts" ,".tsx"],
+          "cwd": "babelrc",
+          "root": ["./src"],
+          "alias": {
+            "src": "./src",
+            "utilities": "./src/utilities",
+            "components": "./src/components",
+            "screens": "./src/screens",
+            "hooks": "./src/hooks",
+          }
+        }
+      ]
+    ]
+  }
+  

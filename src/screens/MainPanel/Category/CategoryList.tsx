@@ -11,17 +11,17 @@ import {
 import { NavigationScreenComponent } from 'react-navigation';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { connect } from 'react-redux';
-import { modifyCategoryItem } from '../../../store/actions/actionCategory';
+import { modifyCategoryItem } from 'store/actions/actionCategory';
 // components
-import axios from '../../../utilities/ AxiosInstance';
+import axios from 'utilities/ AxiosInstance';
 import {
   CategoryListItem,
   ICategoryItemData,
   ICategoryData,
-} from '../../../components/CategoryListItem';
+} from 'components/CategoryListItem';
 // styles
 import styles from './styles';
-import { colors } from '../../../utilities/styles/variables';
+import { colors } from 'utilities/styles/variables';
 
 /**
  * @interface IResponseData

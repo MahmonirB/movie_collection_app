@@ -10,15 +10,12 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 // components
-import axios from '../../../utilities/ AxiosInstance';
-import {
-  MovieListItem,
-  IMovieItemData,
-} from '../../../components/MovieListItem';
+import axios from 'utilities/ AxiosInstance';
+import { MovieListItem, IMovieItemData } from 'components/MovieListItem';
 import { IMovieResponse, IResponseDTO } from '../HomePage';
 // styles
 import styles from './styles';
-import { colors } from '../../../utilities/styles/variables';
+import { colors } from 'utilities/styles/variables';
 
 /**
  * @interface ICategoryMovie
