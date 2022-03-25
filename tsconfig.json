@@ -11,6 +11,7 @@
     "strict": true,
     "target": "esnext"
   },
+  "include": ["axios.d.ts"],
   "exclude": [
     "node_modules",
     "babel.config.js",

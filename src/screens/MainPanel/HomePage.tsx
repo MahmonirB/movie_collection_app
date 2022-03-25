@@ -1,5 +1,5 @@
 // libs
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -9,30 +9,30 @@ import {
   TouchableHighlight,
   RefreshControl,
 } from 'react-native';
-import {NavigationStackProp} from 'react-navigation-stack';
-import {connect} from 'react-redux';
+import { NavigationStackProp } from 'react-navigation-stack';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
-import {NavigationScreenComponent} from 'react-navigation';
+import { NavigationScreenComponent } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 // components
 import axios from '../../utilities/ AxiosInstance';
 import SearchBox from '../../components/SearchBox';
-import {removeToken} from '../../store/actions/actionAuth';
+import { removeToken } from '../../store/actions/actionAuth';
 import MovieListItem, {
   IMovieItemData,
   IMovieData,
 } from '../../components/MovieListItem';
 // styles
-import styles, {underlayColor} from './styleSheet';
-import {colors} from '../../utilities/styles/variables';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import styles from './styleSheet';
+import { colors } from '../../utilities/styles/variables';
+import useDebounce from '../../hooks/useDebounce';
 
 /**
  * @interface IMovieResponse
  */
 export interface IMovieResponse {
-  count: number;
-  results: Array<IMovieData>;
+  count?: number;
+  results?: Array<IMovieData>;
 }
 
 /**
@@ -65,17 +65,19 @@ const ITEM_HEIGHT = 170; // movie item height
 const HomePage: NavigationScreenComponent<any, IHomePage> = (
   props: IHomePage,
 ) => {
-  const {navigation} = props;
+  const { navigation } = props;
   const [movieData, setMovieData] = useState<IMovieResponse>({});
   const [searchText, setSearchText] = useState<string>('');
   const [hasMore, setHasMore] = useState(false);
   const offset = useRef(1);
 
+  const debouncedSearchText = useDebounce(searchText, 700);
+
   useEffect(() => {
     offset.current = 1;
     renderToGetData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchText]);
+  }, [debouncedSearchText]);
 
   /**
    * @name renderToGetData
@@ -83,7 +85,7 @@ const HomePage: NavigationScreenComponent<any, IHomePage> = (
    */
   const renderToGetData = async () => {
     try {
-      const responseData: IResponseDTO = await axios.get(
+      const responseData = await axios.get(
         `/movie/?limit=${limitNum}&offset=${offset.current}&search=${searchText}`,
         {
           headers: {
@@ -91,7 +93,7 @@ const HomePage: NavigationScreenComponent<any, IHomePage> = (
           },
         },
       );
-      if (responseData.status === 200) {
+      if (responseData?.status && responseData?.status === 200) {
         setMovieData(responseData.data);
       } else {
         ToastAndroid.show('Error in request', 5000);
@@ -172,10 +174,11 @@ const HomePage: NavigationScreenComponent<any, IHomePage> = (
       />
       <View>{hasMore && <ActivityIndicator color="blue" size={30} />}</View>
       <View style={styles.footerStyle}>
-      <TouchableHighlight
+        <TouchableHighlight
           onPress={() => navigation?.navigate('MapScreen')}
           underlayColor="white"
-          style={styles.menuItemStyle}>
+          style={styles.menuItemStyle}
+        >
           <>
             <Icon name="map" size={20} />
             <Text>Map Screen</Text>
@@ -184,7 +187,8 @@ const HomePage: NavigationScreenComponent<any, IHomePage> = (
         <TouchableHighlight
           onPress={() => navigation?.navigate('CategoryList')}
           underlayColor="white"
-          style={styles.menuItemStyle}>
+          style={styles.menuItemStyle}
+        >
           <>
             <Icon name="pocket" size={20} />
             <Text>Categories List</Text>
@@ -193,7 +197,8 @@ const HomePage: NavigationScreenComponent<any, IHomePage> = (
         <TouchableHighlight
           underlayColor="white"
           onPress={exitAccout}
-          style={styles.menuItemStyle}>
+          style={styles.menuItemStyle}
+        >
           <>
             <Icon name="log-out" size={20} />
             <Text>Exit</Text>
