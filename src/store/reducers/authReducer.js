@@ -1,4 +1,4 @@
-import {ADD_TOKEN, REMOVE_TOKEN} from '../actions/types';
+import { ADD_TOKEN, REMOVE_TOKEN } from '../actions/types';
 
 const initialState = {
   token: '',

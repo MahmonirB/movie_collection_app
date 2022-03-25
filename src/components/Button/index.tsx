@@ -25,8 +25,8 @@ interface IButton {
  * @name Button
  * @description Button component
  */
-const Button: React.FC<IButton> = (props: IButton) => {
-  const {title, type, active, onClick, style, loading} = props;
+export const Button: React.FC<IButton> = (props: IButton) => {
+  const { title, type, active, onClick, style, loading } = props;
   /**
    * @name getInActiveStyle
    * @description return inactive button style
@@ -56,7 +56,8 @@ const Button: React.FC<IButton> = (props: IButton) => {
         styles.mainContainer,
         buttonTypeStyle(),
         getInActiveStyle(),
-      ]}>
+      ]}
+    >
       {!loading ? (
         <Text style={styles.textStyle}>{title}</Text>
       ) : (
@@ -69,4 +70,3 @@ Button.defaultProps = {
   active: true,
   type: 'default',
 };
-export default Button;

@@ -1,5 +1,5 @@
 // libs
-import React, {useEffect, useState, useRef} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -8,19 +8,20 @@ import {
   Text,
   RefreshControl,
 } from 'react-native';
-import {NavigationScreenComponent} from 'react-navigation';
-import {NavigationStackProp} from 'react-navigation-stack';
-import {connect} from 'react-redux';
-import {modifyCategoryItem} from '../../../store/actions/actionCategory';
+import { NavigationScreenComponent } from 'react-navigation';
+import { NavigationStackProp } from 'react-navigation-stack';
+import { connect } from 'react-redux';
+import { modifyCategoryItem } from '../../../store/actions/actionCategory';
 // components
 import axios from '../../../utilities/ AxiosInstance';
-import CategoryListItem, {
+import {
+  CategoryListItem,
   ICategoryItemData,
   ICategoryData,
 } from '../../../components/CategoryListItem';
 // styles
 import styles from './styles';
-import {colors} from '../../../utilities/styles/variables';
+import { colors } from '../../../utilities/styles/variables';
 
 /**
  * @interface IResponseData
@@ -33,8 +34,8 @@ interface IResponseData {
  * @interface ICategoryResponse
  */
 interface ICategoryResponse {
-  count: number;
-  results: Array<ICategoryData>;
+  count?: number;
+  results?: Array<ICategoryData>;
 }
 /**
  * @interface ICategoryList
@@ -50,7 +51,7 @@ const limitNum = 20;
 const CategoryList: NavigationScreenComponent<any, ICategoryList> = (
   props: ICategoryList,
 ) => {
-  const {navigation} = props;
+  const { navigation } = props;
   const [categoryData, setCategoryData] = useState<ICategoryResponse>({});
   const [hasMore, setHasMore] = useState(false);
   const offset = useRef(1);
@@ -59,7 +60,6 @@ const CategoryList: NavigationScreenComponent<any, ICategoryList> = (
   useEffect(() => {
     renderToGetData();
     return () => (mountStatus.current = false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   /**
    * @name renderToGetData

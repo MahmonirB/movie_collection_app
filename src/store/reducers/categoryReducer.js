@@ -1,4 +1,4 @@
-import {CATEGORY_ITEM} from '../actions/types';
+import { CATEGORY_ITEM } from '../actions/types';
 
 const initialState = {
   categoryItem: '',

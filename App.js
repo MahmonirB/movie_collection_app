@@ -1,10 +1,10 @@
 // libs
 import React from 'react';
-import {StatusBar} from 'react-native';
-import {Provider} from 'react-redux';
+import { StatusBar } from 'react-native';
+import { Provider } from 'react-redux';
 import configureStore from './src/store/store';
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 // components
 import AuthPage from './src/screens/Auth/AuthPage';
 import MainSignPage from './src/screens/Auth/MainSignPage';
@@ -18,14 +18,14 @@ import MapScreen from './src/screens/Map';
 const store = configureStore();
 const stackNavigator = createStackNavigator(
   {
-    AuthPage: {screen: AuthPage},
-    MainSignPage: {screen: MainSignPage},
-    EnterUserName: {screen: EnterUserName},
-    ValidateUser: {screen: ValidateUser},
-    HomePage: {screen: HomePage},
-    CategoryList: {screen: CategoryList},
-    CategoryMovie: {screen: CategoryMovie},
-    MapScreen: {screen: MapScreen},
+    AuthPage: { screen: AuthPage },
+    MainSignPage: { screen: MainSignPage },
+    EnterUserName: { screen: EnterUserName },
+    ValidateUser: { screen: ValidateUser },
+    HomePage: { screen: HomePage },
+    CategoryList: { screen: CategoryList },
+    CategoryMovie: { screen: CategoryMovie },
+    MapScreen: { screen: MapScreen },
   },
   {
     initialRouteName: 'AuthPage',

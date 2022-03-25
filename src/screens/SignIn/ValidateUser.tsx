@@ -1,16 +1,15 @@
 // libs
-import React, {useState} from 'react';
-import {ToastAndroid, View, Text} from 'react-native';
+import React, { useState } from 'react';
+import { ToastAndroid, View, Text } from 'react-native';
 import styles from './styles';
-import {NavigationStackProp} from 'react-navigation-stack';
+import { NavigationStackProp } from 'react-navigation-stack';
 import AsyncStorage from '@react-native-community/async-storage';
-import {connect} from 'react-redux';
-import {addToken, removeToken} from '../../store/actions/actionAuth';
-import {NavigationScreenComponent} from 'react-navigation';
+import { connect } from 'react-redux';
+import { addToken, removeToken } from '../../store/actions/actionAuth';
+import { NavigationScreenComponent } from 'react-navigation';
 // components
 import axios from '../../utilities/ AxiosInstance';
-import Button from '../../components/Button';
-import TextBox from '../../components/TextBox';
+import { Button, TextBox } from '../../components';
 
 /**
  * @interface IValidateUser
@@ -21,7 +20,7 @@ interface IValidateUser {
 const ValidateUser: NavigationScreenComponent<any, IValidateUser> = (
   props: IValidateUser,
 ) => {
-  const {navigation} = props;
+  const { navigation } = props;
   const userName = navigation?.getParam('userName', '');
   const [validationCode, setValidationCode] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);

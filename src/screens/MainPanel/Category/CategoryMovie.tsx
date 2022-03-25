@@ -1,5 +1,5 @@
 // libs
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -8,14 +8,17 @@ import {
   RefreshControl,
   Text,
 } from 'react-native';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 // components
 import axios from '../../../utilities/ AxiosInstance';
-import MovieListItem, {IMovieItemData} from '../../../components/MovieListItem';
-import {IMovieResponse, IResponseDTO} from '../HomePage';
+import {
+  MovieListItem,
+  IMovieItemData,
+} from '../../../components/MovieListItem';
+import { IMovieResponse, IResponseDTO } from '../HomePage';
 // styles
 import styles from './styles';
-import {colors} from '../../../utilities/styles/variables';
+import { colors } from '../../../utilities/styles/variables';
 
 /**
  * @interface ICategoryMovie

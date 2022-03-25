@@ -1,4 +1,4 @@
-import {StyleSheet, Platform} from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -15,6 +15,6 @@ const styles = StyleSheet.create({
     width: 164,
     height: 64,
   },
-  titleLogin: {marginBottom: 24, fontSize: 18, fontWeight: 'bold'},
+  titleLogin: { marginBottom: 24, fontSize: 18, fontWeight: 'bold' },
 });
 export default styles;

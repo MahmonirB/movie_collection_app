@@ -1,8 +1,8 @@
 // libs
 import React from 'react';
-import {StyleProp, TextInput, ViewStyle} from 'react-native';
+import { StyleProp, TextInput, ViewStyle } from 'react-native';
 // utility
-import {colors} from '../../utilities/styles/variables';
+import { colors } from '../../utilities/styles/variables';
 import styles from './styles';
 /**
  * @interface ITextBox
@@ -17,8 +17,8 @@ interface ITextBox {
  * @name TextBox
  * @description TextBox component
  */
-const TextBox: React.FC<ITextBox> = (props: ITextBox) => {
-  const {style, placeholderText, onChange} = props;
+export const TextBox: React.FC<ITextBox> = (props: ITextBox) => {
+  const { style, placeholderText, onChange } = props;
 
   return (
     <TextInput
@@ -38,4 +38,3 @@ const TextBox: React.FC<ITextBox> = (props: ITextBox) => {
 TextBox.defaultProps = {
   placeholderText: 'Enter ...',
 };
-export default TextBox;

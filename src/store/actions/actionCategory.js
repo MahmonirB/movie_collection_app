@@ -1,4 +1,4 @@
-import {CATEGORY_ITEM} from './types';
+import { CATEGORY_ITEM } from './types';
 
 export const modifyCategoryItem = (categoryItem) => {
   return {

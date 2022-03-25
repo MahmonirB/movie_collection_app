@@ -1,12 +1,12 @@
 //libs
 import React from 'react';
-import {View, TextInput} from 'react-native';
+import { View, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 // styles
 import styles from './styles';
 // utility
-import {colors} from '../../utilities/styles/variables';
+import { colors } from '../../utilities/styles/variables';
 
 /**
  * @name ISearchBox
@@ -14,8 +14,8 @@ import {colors} from '../../utilities/styles/variables';
 interface ISearchBox {
   onChange?: (arg0: string) => void;
 }
-const SearchBox: React.FC<ISearchBox> = (props: ISearchBox) => {
-  const {onChange} = props;
+export const SearchBox: React.FC<ISearchBox> = (props: ISearchBox) => {
+  const { onChange } = props;
   return (
     <View style={styles.searchContainer}>
       <Icon name={'search'} size={15} />
@@ -33,4 +33,3 @@ const SearchBox: React.FC<ISearchBox> = (props: ISearchBox) => {
     </View>
   );
 };
-export default SearchBox;

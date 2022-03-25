@@ -1,6 +1,6 @@
 //libs
-import React, {memo} from 'react';
-import {Text, View} from 'react-native';
+import React, { memo } from 'react';
+import { Text, View } from 'react-native';
 // styles
 import styles from './styles';
 
@@ -26,21 +26,23 @@ export interface IMovieItemData {
 interface IMovieListItem {
   movieItemData: IMovieItemData;
 }
-const MovieListItem: React.FC<IMovieListItem> = (props: IMovieListItem) => {
-  const {movieItemData} = props;
-  return (
-    <View style={styles.listItemStyle}>
-      <Text style={styles.titleStyle}>{movieItemData.item.title}</Text>
-      <Text style={styles.subTitle}>
-        Release date: {movieItemData.item.date_of_release}
-      </Text>
-      <Text style={styles.subTitle}>
-        Director: {movieItemData.item.director}
-      </Text>
-      <Text style={styles.subTitle}>Rating: {movieItemData.item.rating}</Text>
-    </View>
-  );
-};
+const MovieListItem: React.FC<IMovieListItem> = memo(
+  (props: IMovieListItem) => {
+    const { movieItemData } = props;
+    return (
+      <View style={styles.listItemStyle}>
+        <Text style={styles.titleStyle}>{movieItemData.item.title}</Text>
+        <Text style={styles.subTitle}>
+          Release date: {movieItemData.item.date_of_release}
+        </Text>
+        <Text style={styles.subTitle}>
+          Director: {movieItemData.item.director}
+        </Text>
+        <Text style={styles.subTitle}>Rating: {movieItemData.item.rating}</Text>
+      </View>
+    );
+  },
+);
 MovieListItem.defaultProps = {
   movieItemData: {
     item: {
@@ -51,4 +53,4 @@ MovieListItem.defaultProps = {
     },
   },
 };
-export default memo(MovieListItem);
+export { MovieListItem };

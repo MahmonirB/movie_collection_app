@@ -1,10 +1,10 @@
 // libs
-import React, {useEffect} from 'react';
-import {Image, View} from 'react-native';
-import {connect} from 'react-redux';
-import {addToken} from '../../store/actions/actionAuth';
-import {NavigationStackProp} from 'react-navigation-stack';
-import {NavigationScreenComponent} from 'react-navigation';
+import React, { useEffect } from 'react';
+import { Image, View } from 'react-native';
+import { connect } from 'react-redux';
+import { addToken } from '../../store/actions/actionAuth';
+import { NavigationStackProp } from 'react-navigation-stack';
+import { NavigationScreenComponent } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 // assets
 import logo from '../../../assets/images/logo.png';
@@ -21,7 +21,7 @@ interface IAuthPage {
 const AuthPage: NavigationScreenComponent<any, IAuthPage> = (
   props: IAuthPage,
 ) => {
-  const {navigation} = props;
+  const { navigation } = props;
   useEffect(() => {
     checkAuthentication();
     // eslint-disable-next-line react-hooks/exhaustive-deps
