@@ -1,7 +1,7 @@
 // libs
 import { StyleSheet } from 'react-native';
 // utility
-import { colors } from '../../utilities/styles/variables';
+import { colors } from 'utilities/styles/variables';
 
 const styles = StyleSheet.create({
   mainContainer: {

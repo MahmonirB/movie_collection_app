@@ -4,7 +4,7 @@ import { Text, View } from 'react-native';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { NavigationScreenComponent } from 'react-navigation';
 // components
-import { Button } from '../../components';
+import { Button } from 'components';
 // styles
 import styles from './styles';
 

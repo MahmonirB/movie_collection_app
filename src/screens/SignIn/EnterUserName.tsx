@@ -5,7 +5,7 @@ import styles from './styles';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { NavigationScreenComponent } from 'react-navigation';
 // components
-import { Button, TextBox } from '../../components';
+import { Button, TextBox } from 'components';
 
 /**
  * @interface IEnterUserName

@@ -9,9 +9,23 @@
     "moduleResolution": "node",
     "noEmit": true,
     "strict": true,
-    "target": "esnext"
+    "target": "esnext",
+    "baseUrl": ".",
+      "paths": {
+      "src/*": ["./src/*"],
+      "utilities":["./src/utilities"],
+      "utilities/*": ["./src/utilities/*"],
+      "components": ["./src/components"],
+      "components/*": ["./src/components/*"],
+      "screens": ["./src/screens"],
+      "screens/*": ["./src/screens/*"],
+      "hooks": ["./src/hooks"],
+      "hooks/*": ["./src/hooks/*"],
+      "store": ["./src/store"],
+      "store/*": ["./src/store/*"],
+      }
   },
-  "include": ["axios.d.ts"],
+  "include": ["axios.d.ts", "src/**/*.tsx","src/**/*.ts"],
   "exclude": [
     "node_modules",
     "babel.config.js",

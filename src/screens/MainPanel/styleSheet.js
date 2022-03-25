@@ -1,5 +1,5 @@
 import { StyleSheet, Platform } from 'react-native';
-import { colors } from '../../utilities/styles/variables';
+import { colors } from 'utilities/styles/variables';
 
 export const underlayColor = colors.grayInactive;
 const styles = StyleSheet.create({
