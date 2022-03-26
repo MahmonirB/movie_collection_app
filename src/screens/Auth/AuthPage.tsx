@@ -6,8 +6,6 @@ import { addToken } from 'store/actions/actionAuth';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { NavigationScreenComponent } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
-// assets
-import logo from '../../../assets/images/logo.png';
 // styles
 import styles from './styles';
 
@@ -43,7 +41,11 @@ const AuthPage: NavigationScreenComponent<any, IAuthPage> = (
   };
   return (
     <View style={styles.mainContainer}>
-      <Image resizeMode="contain" source={logo} style={styles.logoStyle} />
+      <Image
+        resizeMode="contain"
+        source={require('assets/images/logo.png')}
+        style={styles.logoStyle}
+      />
     </View>
   );
 };
