@@ -14,11 +14,11 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 import { NavigationScreenComponent } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
-import axios from 'react-native-axios';
 // components
 import { SearchBox, MovieListItem } from 'components';
 import { removeToken } from 'store/actions/actionAuth';
 import { IMovieItemData, IMovieData } from 'components/MovieListItem';
+import axios from 'utilities/AxiosInstance';
 // styles
 import styles from './styleSheet';
 import { colors } from 'utilities/styles/variables';
