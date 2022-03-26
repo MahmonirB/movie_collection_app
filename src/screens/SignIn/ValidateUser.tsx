@@ -1,7 +1,6 @@
 // libs
 import React, { useState } from 'react';
 import { ToastAndroid, View, Text } from 'react-native';
-import axios from 'react-native-axios';
 import { NavigationStackProp } from 'react-navigation-stack';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
@@ -10,6 +9,7 @@ import { NavigationScreenComponent } from 'react-navigation';
 import { addToken, removeToken } from 'store/actions/actionAuth';
 // components
 import { Button, TextBox } from 'components';
+import axios from 'utilities/AxiosInstance';
 // styles
 import styles from './styles';
 /**
